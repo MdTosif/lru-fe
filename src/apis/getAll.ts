@@ -9,5 +9,10 @@ export default function useGetAllCacheApi() {
   return useSWR<{ key: string; value: string; timeout: string }[]>(
     `https://${import.meta.env.VITE_BE}/cache/all`,
     fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
   );
 }
