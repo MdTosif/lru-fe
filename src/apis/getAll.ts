@@ -13,13 +13,9 @@ export default function useGetAllCacheApi() {
     const json = await res.json();
     return json;
   };
-  return useSWR<ApiRes>(
-    `http://${import.meta.env.VITE_BE}/cache/all`,
-    fetcher,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    },
-  );
+  return useSWR<ApiRes>(`${import.meta.env.VITE_BE_HTTP}/cache/all`, fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 }

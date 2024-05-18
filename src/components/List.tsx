@@ -17,7 +17,7 @@ export default function List({
   // });
 
   const onDelete = async (key: string) => {
-    const res = await fetch(`http://${import.meta.env.VITE_BE}/cache`, {
+    const res = await fetch(`${import.meta.env.VITE_BE_HTTP}/cache`, {
       method: "delete",
       body: JSON.stringify({
         key,
@@ -28,7 +28,7 @@ export default function List({
   };
 
   const getKey = async (key: string) => {
-    const res = await fetch(`http://${import.meta.env.VITE_BE}/cache/${key}`, {
+    const res = await fetch(`${import.meta.env.VITE_BE_HTTP}/cache/${key}`, {
       method: "get",
     });
     const json = await res.json();

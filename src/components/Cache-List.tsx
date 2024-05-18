@@ -9,7 +9,7 @@ export default function CacheList() {
   const [refresh, setRefresh] = useState(0);
   const [data, setData] = useState<ApiRes | undefined>([]);
   const { lastJsonMessage: liveData }: { lastJsonMessage: ApiRes } =
-    useWebSocket(`ws://${import.meta.env.VITE_BE}/ws`);
+    useWebSocket(`${import.meta.env.VITE_BE_WS}/ws`);
 
   const { data: apiData, mutate } = useGetAllCacheApi();
 

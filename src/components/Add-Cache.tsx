@@ -7,7 +7,7 @@ function AddCache() {
   // const toast = useToastStore();
   const submitHandle = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await fetch(`http://${import.meta.env.VITE_BE}/cache`, {
+    const res = await fetch(`${import.meta.env.VITE_BE_HTTP}/cache`, {
       method: "post",
       body: JSON.stringify({
         ...cache,
