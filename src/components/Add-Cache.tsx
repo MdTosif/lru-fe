@@ -2,12 +2,12 @@ import { useState } from "react";
 import Card from "./Card";
 
 function AddCache() {
-  const [cache, setCache] = useState({ key: "", value: "" });
+  const [cache, setCache] = useState({ key: "", value: "", timeout: 5 });
   const [msg, setMsg] = useState<string | undefined>();
   // const toast = useToastStore();
   const submitHandle = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await fetch(`https://${import.meta.env.VITE_BE}/cache`, {
+    const res = await fetch(`http://${import.meta.env.VITE_BE}/cache`, {
       method: "post",
       body: JSON.stringify({
         ...cache,
@@ -57,6 +57,18 @@ function AddCache() {
                 value={cache.value}
                 onChange={(e) =>
                   setCache((s) => ({ ...s, value: e.target.value }))
+                }
+              />
+            </label>
+            <label className=" col-span-12 input input-bordered flex items-center gap-2">
+              <span className="w-14 text-primary">Expires At (in seconds)</span>
+              <input
+                type="text"
+                className="grow "
+                placeholder="Daisy"
+                value={cache.timeout}
+                onChange={(e) =>
+                  setCache((s) => ({ ...s, timeout: Number(e.target.value) }))
                 }
               />
             </label>

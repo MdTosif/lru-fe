@@ -1,19 +1,15 @@
 import useWebSocket from "react-use-websocket";
 import List from "./List";
-import useGetAllCacheApi from "../apis/getAll";
+import useGetAllCacheApi, { ApiRes } from "../apis/getAll";
 import { useEffect, useState } from "react";
 import IconRefresh from "./icon/refresh-icon";
 
 export default function CacheList() {
   const [live, setLive] = useState("false");
   const [refresh, setRefresh] = useState(0);
-  const [data, setData] = useState<
-    { key: string; value: string; timeout: string }[] | undefined
-  >([]);
-  const {
-    lastJsonMessage: liveData,
-  }: { lastJsonMessage: { key: string; value: string; timeout: string }[] } =
-    useWebSocket(`wss://${import.meta.env.VITE_BE}/ws`);
+  const [data, setData] = useState<ApiRes | undefined>([]);
+  const { lastJsonMessage: liveData }: { lastJsonMessage: ApiRes } =
+    useWebSocket(`ws://${import.meta.env.VITE_BE}/ws`);
 
   const { data: apiData, mutate } = useGetAllCacheApi();
 
@@ -59,7 +55,7 @@ export default function CacheList() {
             key={e.key}
             keyName={e.key}
             value={e.value}
-            timestamp={e.timeout}
+            timestamp={e.expiresAt}
           />
         ))}
     </>
